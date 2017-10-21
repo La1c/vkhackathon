@@ -33,8 +33,8 @@ class VKYAW(object):
         return self.get_users_info(event_members)
     
     def get_event_subs_inter(self, user_id, event_id):
-        event_members_iter= wrapper.tools.get_all_iter('groups.getMembers', 1000, {'group_id': event_id})
-        coeffs = [(member_id, wrapper.subs_coeff(user_id, member_id)) for member_id in event_members_iter]
+        event_members_iter= self.tools.get_all_iter('groups.getMembers', 1000, {'group_id': event_id})
+        coeffs = [(member_id, self.subs_coeff(user_id, member_id)) for member_id in event_members_iter]
         return self.get_users_info([entry[0] for entry in sorted(coeffs, key=lambda entry: entry[1], reverse=True)])
     
     def get_subs_group_set(self, user_id):
