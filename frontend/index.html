@@ -20,7 +20,7 @@
     </main><!-- /.container -->
     <nav class="navbar fixed-bottom navbar-light bg-light">
       <form class="form-inline mx-auto">
-        <button class="btn btn-outline-light themed-colored" type="button">Пригласить</button>
+        <button class="btn btn-outline-light themed-colored" type="button" id="inviteButton">Пригласить</button>
       </form>
     </nav>
 
@@ -30,6 +30,27 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+    <script type="text/javascript">
+    var sendRequest = function(){
+      VK.api("apps.sendRequest", {"user_id": 221142478, "text": "Привет, Федя", "type":"request", "name":"call", "key":"userCameBack"}, function (data) {
+        console.log("request sent")
+        console.log(data)
+      });
+    }
+      VK.init(function() {
+     // API initialization succeeded
+     // Your code here
+        console.log("Init succeeded");
+        VK.addCallback('onSettingsChanged', sendRequest())
+        VK.callMethod("showSettingsBox", 262147);
+      }, function() {
+     // API initialization failed
+     // Can reload page here
+        console.log("Init failed")
+      }, '5.68');
+    </script>
 
     <script>
     var people =    [
@@ -182,18 +203,45 @@
     'photo': 'https://pp.userapi.com/c841233/v841233146/234e3/Vid1_jJS_iA.jpg'}
     ],html;
 
+  var selectedID = {}
+  var selectedCNT = 0
+
     $(document).ready(function () {
-     html = '<div class="container-fluid" >';
+     html = '<div class="container-fluid" id="userList">';
        var flag = 0;
        $.each(people, function(index, v){
-           html += '<div class="d-flex flex-row">';
+           html += '<div class="d-flex flex-row active-user" id="'+ v["id"] +'" onclick=togleUser(this)>';
+           selectedID["" + v["id"]] = true
+           selectedCNT += 1
            html += '<img  src="' +v["photo"]+'" class="p-2 rounded-circle">';
             html += '<div class="p-2 align-self-center">'+v["name"]+ '</div>';
             html += '</div>';
         });
         html += '</div>';
         $('body').append(html);
+        //console.log(selectedCNT)
+
+        var button = document.getElementById("inviteButton")
+        button.firstChild.data = 'Пригласить (' + selectedCNT + ')'
     });
+
+
+    function togleUser(element){
+        var button = document.getElementById("inviteButton")
+        if (element.className == "d-flex flex-row active-user") {
+        element.className = "d-flex flex-row inactive-user";
+        selectedID[element.id] = false
+        selectedCNT -= 1
+        //console.log(selectedID)
+      } else {
+        element.className = "d-flex flex-row active-user";
+        selectedID[element.id] = true
+        selectedCNT += 1
+        //console.log(selectedID)
+      }
+
+      button.firstChild.data = 'Пригласить (' + selectedCNT + ')'
+    }
     </script>
   </body>
 </html>
