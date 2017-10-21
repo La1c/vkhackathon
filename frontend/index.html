@@ -16,13 +16,33 @@
       <div class="header container-fluid themed-colored">
         Здесь будет пикча
       </div>
-    <main role="main" class="container">
+      <main role="main" class="container">
     </main><!-- /.container -->
     <nav class="navbar fixed-bottom navbar-light bg-light">
       <form class="form-inline mx-auto">
-        <button class="btn btn-outline-light themed-colored" type="button" id="inviteButton">Пригласить</button>
+        <button class="btn btn-outline-light themed-colored" type="button" data-toggle="modal" id="inviteButton" data-target="#exampleModal">Пригласить</button>
       </form>
     </nav>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog verticaly-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Формируем приглашение</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            Какой-то текст
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+          <button type="button" class="btn btn-primary">Пригласить!</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
