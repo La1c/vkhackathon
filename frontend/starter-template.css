@@ -5,3 +5,11 @@
 .themed-colored{
   background-color: #45668e;
 }
+
+.active-user{
+  background-color:  #E9EDF1;
+}
+
+.verticaly-centered{
+  top: 30%;
+}
