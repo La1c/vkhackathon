@@ -56,13 +56,13 @@ class VKYAW(object):
             print(error_msg, id_one, id_two)
             return 0 
 
-iwrapper = VKYAW()
+wrapper = VKYAW()
 app = Flask(__name__)
         
 @app.route('/compaignons', methods=['GET'])
 def get_compaignons():
     user_id = request.args.get('user_id', '')
-    event_name = request.args.get('event_id', '')
+    event_id = request.args.get('event_id', '')
 
 #     response = wrapper.get_event_all(event_name)
     response = wrapper.get_event_subs_inter(user_id, event_id)
