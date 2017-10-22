@@ -7,11 +7,11 @@
 }
 
 .active-user{
-  background-color:  #45668e;
+  background-color:  #b3cce6;
 }
 
 .verticaly-centered{
-  top: 30%;
+  top:20%;
 }
 
 .btn:disabled{
@@ -21,7 +21,7 @@
 .list {
   padding-top: 50px;
   padding-bottom: 50px;
-  padding:5px;
+  padding:50px;
 }
 @media (max-width: 979px) {
   .body {
@@ -33,8 +33,21 @@
   margin:5px;
 }
 
+.top-image{
+  padding: 0px;
+}
+
+.lead{
+  text-align: center;
+}
+
+.annotation{
+  color:  #bfbfbf;
+}
+
 .jumbotron
 {
+    background-size: cover;
     padding-top: 0px;
     padding-bottom:0px;
     width: 100%; /* make sure to define width to fill container */

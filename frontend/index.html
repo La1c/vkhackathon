@@ -17,8 +17,8 @@
       <!--<div class="header container-fluid themed-colored">-->
       <!--</div>-->
       <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <img src="https://sun9-13.userapi.com/c836720/v836720505/56e36/0rrydy7oDOY.jpg" class="container-fluid"></img>
+      <div class="container-fluid">
+      <img src="https://sun9-13.userapi.com/c836720/v836720505/56e36/0rrydy7oDOY.jpg" class="container-fluid top-image"></img>
         <p class="lead">Наш алгоритм подобрал для Вас несколько людей со схожими интересами, предложите им пойти на событие вместе?</p>
         </div>
       </div>
@@ -46,15 +46,15 @@
           <div class="modal-body">
             <div class="d-flex flex-row mx-auto">
               <img  src="https://pp.userapi.com/c619717/v619717519/1680c/zo9xVisAjMo.jpg" class="p-2 rounded-circle">
-             <div class="p-2 align-self-center">
+             <div class="p-2 align-self-center annotation">
                Мы создали универсальное приглашение, которое вы можете отправить выбранным пользователям. Нажмите "Пригласить" и ждите ответа!
              </div>
            </div>
            <div class="d-flex flex-column">
             <div class="form-group">
               <label for="MessageArea">Приглашение:</label>
-              <textarea class="form-control" id="MessageArea" rows="4">Здравствуйте! Мы оба идём на /событие/. Мне неизвестный алгоритм нашел наши интересы схожими и предложил пойти вместе. Я за, вместе веселее. Идем?
-Событие пройдёт /тогда-то/ в /там-то/.
+              <textarea class="form-control" id="MessageArea" rows="5">Здравствуйте! Мы оба идём на Junction. Мне неизвестный алгоритм нашел наши интересы схожими и предложил пойти вместе. Я за, вместе веселее. Идем?
+Событие пройдёт 24-26  в Хельсинки.
             </textarea>
           </div>
           </div>
@@ -107,6 +107,48 @@
     var eventID = 58253397
     var userID = 221142478
     var userPic = "https://pp.userapi.com/c619717/v619717519/1680c/zo9xVisAjMo.jpg"
+    var people=[
+  {
+    "id": 17008411,
+    "name": "\u0413\u0430\u043b\u0438\u043d\u0430 \u0424\u0438\u043b\u044c\u0447\u0430\u043a\u043e\u0432\u0430",
+    "photo": "https://pp.userapi.com/c628426/v628426411/3fc0e/QqUPrQRYTlc.jpg"
+  },
+  {
+    "id": 78675396,
+    "name": "\u041d\u043e\u0433\u0430 \u041f\u0440\u0430\u0432\u0430\u044f",
+    "photo": "https://pp.userapi.com/c617320/v617320396/b421/QYn16KU8ikk.jpg"
+  },
+  {
+    "id": 123080210,
+    "name": "\u0410\u043b\u0451\u043d\u0430 \u0412\u0438\u043d\u043d\u0438\u043a\u043e\u0432\u0430",
+    "photo": "https://pp.userapi.com/c638125/v638125465/59d40/8EBp6Fh214w.jpg"
+  },
+  {
+    "id": 35689393,
+    "name": "\u0410\u043d\u0430\u0441\u0442\u0430\u0441\u0438\u044f \u041a\u043b\u0451\u043d\u0441\u043a\u0430\u044f",
+    "photo": "https://pp.userapi.com/c636117/v636117393/403aa/aIWB9MrF0UQ.jpg"
+  },
+  {
+    "id": 16482519,
+    "name": "\u0414\u0430\u0448\u0430 \u0428\u0438\u0440\u0438\u043d\u043a\u0438\u043d\u0430",
+    "photo": "https://pp.userapi.com/c619717/v619717519/1680c/zo9xVisAjMo.jpg"
+  },
+  {
+    "id": 27248952,
+    "name": "\u0415\u0432\u0433\u0435\u043d\u0438\u044f \u0422\u0440\u0430\u043f\u0435\u0437\u043d\u0438\u043a\u043e\u0432\u0430",
+    "photo": "https://pp.userapi.com/c626931/v626931952/3474f/XyE-Zj458hc.jpg"
+  },
+  {
+    "id": 48518487,
+    "name": "\u0414\u0430\u0448\u0430 \u041f\u043e\u043b\u043e\u043d\u0435\u0435\u0432\u0430",
+    "photo": "https://pp.userapi.com/c837129/v837129307/5f204/Uq84gYbtBtc.jpg"
+  },
+  {
+    "id": 182145952,
+    "name": "\u041d\u0438\u043a\u0438\u0442\u0430 \u041c\u0438\u0440\u043e\u0448\u043d\u0438\u0447\u0435\u043d\u043a\u043e",
+    "photo": "https://pp.userapi.com/c837521/v837521952/cde3/VLxO6Yd-T9c.jpg"
+  }
+],html;
 
       function represent(json) {
        html = '<div class="container-fluid list" id="userList">';
@@ -129,7 +171,8 @@
 
     $(document).ready(function () {
       console.log("ready")
-      $.getJSON("http://127.0.0.1:5000/compaignons?user_id=" + userID + "&event_id=" + eventID, function(data){
+      represent(people)
+      /*$.getJSON("http://127.0.0.1:5000/compaignons?user_id=" + userID + "&event_id=" + eventID, function(data){
         console.log( "success" );
         //console.log(data);
         people = data
@@ -143,7 +186,7 @@
       })
       .always(function() {
         console.log( "complete" );
-      });
+      });*/
       });
 
     function togleUser(element){
