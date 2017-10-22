@@ -14,16 +14,22 @@
     <link href="starter-template.css" rel="stylesheet">
   </head>
   <body>
-      <div class="header container-fluid themed-colored">
-        Здесь будет пикча
+      <!--<div class="header container-fluid themed-colored">-->
+      <!--</div>-->
+      <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <img src="https://sun9-13.userapi.com/c836720/v836720505/56e36/0rrydy7oDOY.jpg" class="container-fluid"></img>
+        <p class="lead">Наш алгоритм подобрал для Вас несколько людей со схожими интересами, предложите им пойти на событие вместе?</p>
+        </div>
       </div>
-      <main role="main" class="container">
+      <main role="main" class="container-fluid mx-auto">
     </main><!-- /.container -->
 
     <!-- NAVBAR -->
     <nav class="navbar fixed-bottom navbar-light bg-light">
       <form class="form-inline mx-auto">
-        <button class="btn btn-outline-light themed-colored" type="button" data-toggle="modal" id="inviteButton" data-target="#invitationModal">Сформировать приглашения</button>
+        <button class="btn btn-outline-light themed-colored" type="button" data-toggle="modal" id="cancelSelectionButton" onclick="togleSelection()" disabled>Отменить выделение</button>
+        <button class="btn btn-outline-light themed-colored" type="button" data-toggle="modal" id="inviteButton" data-target="#invitationModal" disabled>Создать приглашения</button>
       </form>
     </nav>
 
@@ -32,20 +38,23 @@
       <div class="modal-dialog verticaly-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="invitationModalLabel">Формируем приглашение</h5>
+            <h5 class="modal-title" id="invitationModalLabel">Создать приглашение</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
           </div>
           <div class="modal-body">
             <div class="d-flex flex-row mx-auto">
-              <img  src="https://pp.userapi.com/c620516/v620516054/c6f1/10TzzzWt_EU.jpg" class="p-2 rounded-circle">
-             <div class="p-2 align-self-center">Текст</div>
+              <img  src="https://pp.userapi.com/c619717/v619717519/1680c/zo9xVisAjMo.jpg" class="p-2 rounded-circle">
+             <div class="p-2 align-self-center">
+               Мы создали универсальное приглашение, которое вы можете отправить выбранным пользователям. Нажмите "Пригласить" и ждите ответа!
+             </div>
            </div>
            <div class="d-flex flex-column">
             <div class="form-group">
               <label for="MessageArea">Приглашение:</label>
-              <textarea class="form-control" id="MessageArea" rows="3">Приглашаю Вас на событие X, которое пройдет в N через две недели – DD/MM/YY
+              <textarea class="form-control" id="MessageArea" rows="4">Здравствуйте! Мы оба идём на /событие/. Мне неизвестный алгоритм нашел наши интересы схожими и предложил пойти вместе. Я за, вместе веселее. Идем?
+Событие пройдёт /тогда-то/ в /там-то/.
             </textarea>
           </div>
           </div>
@@ -90,7 +99,6 @@
       }, '5.68');
     </script>
 
-
     <!-- LOADING LIST OF USERS -->
     <script>
     var people = {}
@@ -98,12 +106,13 @@
     var selectedCNT = 0
     var eventID = 58253397
     var userID = 221142478
+    var userPic = "https://pp.userapi.com/c619717/v619717519/1680c/zo9xVisAjMo.jpg"
 
       function represent(json) {
-       html = '<div class="container-fluid" id="userList">';
+       html = '<div class="container-fluid list" id="userList">';
          var flag = 0;
          $.each(json, function(index, v){
-             html += '<div class="d-flex flex-row active-user" id="'+ v["id"] +'" onclick=togleUser(this)>';
+             html += '<div class="d-flex flex-row active-user rounded user-row" id="'+ v["id"] +'" onclick=togleUser(this)>';
              selectedID["" + v["id"]] = true
              selectedCNT += 1
              html += '<img  src="' +v["photo"]+'" class="p-2 rounded-circle">';
@@ -114,14 +123,15 @@
           $('body').append(html);
           //console.log(selectedCNT)
           var button = document.getElementById("inviteButton")
-          button.firstChild.data = 'Сформировать приглашения (' + selectedCNT + ')'
+          button.firstChild.data = 'Создать приглашения (' + selectedCNT + ')'
+          $('input[type="button"], button').disable(false);
       }
 
     $(document).ready(function () {
       console.log("ready")
       $.getJSON("http://127.0.0.1:5000/compaignons?user_id=" + userID + "&event_id=" + eventID, function(data){
         console.log( "success" );
-        console.log(data);
+        //console.log(data);
         people = data
         represent(people)
       })
@@ -138,24 +148,46 @@
 
     function togleUser(element){
         var button = document.getElementById("inviteButton")
-        if (element.className == "d-flex flex-row active-user") {
-        element.className = "d-flex flex-row inactive-user";
+        if (element.className == "d-flex flex-row active-user rounded user-row") {
+        element.className = "d-flex flex-row inactive-user rounded user-row";
         selectedID[element.id] = false
         selectedCNT -= 1
         //console.log(selectedID)
       } else {
-        element.className = "d-flex flex-row active-user";
+        element.className = "d-flex flex-row active-user rounded user-row";
         selectedID[element.id] = true
         selectedCNT += 1
         //console.log(selectedID)
       }
 
-      button.firstChild.data = 'Сформировать приглашения (' + selectedCNT + ')'
+      button.firstChild.data = 'Создать приглашения (' + selectedCNT + ')'
+    }
+
+    function togleSelection(){
+      var list = document.getElementById("userList").childNodes;
+      list.forEach(function(element){
+        console.log(element);
+        if (element.className == "d-flex flex-row active-user rounded user-row") {
+        element.className = "d-flex flex-row inactive-user rounded user-row";
+        selectedID[element.id] = false
+        selectedCNT -= 1
+      }})
+
+      var button = document.getElementById("inviteButton")
+      button.firstChild.data = 'Создать приглашения (' + selectedCNT + ')'
     }
 
     $('#invitationModal').on('show.bs.modal', function (e) {
       var button = document.getElementById("formInvitationButton")
       button.firstChild.data = 'Пригласить! (' + selectedCNT + ')'
+    });
+
+    jQuery.fn.extend({
+    disable: function(state) {
+        return this.each(function() {
+            this.disabled = state;
+        });
+      }
     });
     </script>
   </body>

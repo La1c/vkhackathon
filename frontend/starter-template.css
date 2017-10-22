@@ -7,9 +7,37 @@
 }
 
 .active-user{
-  background-color:  #E9EDF1;
+  background-color:  #45668e;
 }
 
 .verticaly-centered{
   top: 30%;
 }
+
+.btn:disabled{
+    background-color: #c6d9ec;
+}
+
+.list {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding:5px;
+}
+@media (max-width: 979px) {
+  .body {
+    padding-bottom: 0px;
+  }
+}
+
+.user-row{
+  margin:5px;
+}
+
+.jumbotron
+{
+    padding-top: 0px;
+    padding-bottom:0px;
+    width: 100%; /* make sure to define width to fill container */
+                   /* so you can see your image */
+    max-width:1400px;  /* define the max width */
+ }
